@@ -1,5 +1,6 @@
 // import { v4 as uuidv4 } from 'uuid';
 import { useSelector } from 'react-redux';
+import { Toaster } from 'react-hot-toast';
 import {
   Container,
   Title,
@@ -21,7 +22,8 @@ export default function App() {
       <Form/>
       {contacts.length > 0 && <SectionTitle>Contacts</SectionTitle>}
       {contacts.length > 0 && <Filter/>}
-      <ContactList/>
+      <ContactList />
+      <Toaster position="top-right" />
     </Container>
   );
 }

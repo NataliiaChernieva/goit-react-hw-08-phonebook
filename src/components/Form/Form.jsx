@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { toast } from 'react-hot-toast';
 import { CustomForm } from './Form.styled';
+// import { Spinner } from '../Spinner/Spinner';
 import Button from '../Button/Button';
 import Input from '../Input/Input';
 import { useDispatch, useSelector } from 'react-redux';
-// import {addContact} from '../../redux/slices/items.js';
 import {postContact} from 'redux/contacts/contactsOperations';
 import { getContacts } from 'redux/contacts/contactsSelectors';
 
@@ -37,10 +38,10 @@ export default function Form() {
 
     contacts.find(savedContact => savedContact.name === name)
       ? alert(`${name} is already in contacts`)
-      // : dispatch(addContact({ name, number, id }));
       : dispatch(postContact({ name, number, id }));
       
     reset();
+    toast.success('Сontact is added to the phone book!');
   };
 
   const reset = () => {
@@ -69,6 +70,10 @@ export default function Form() {
         onChange={handleSetInfo}
       />
       <Button type="submit" text="Add contact" />
+       {/* <Button type="submit" disabled={isLoading}>
+        {isLoading && <Spinner size={12} />}
+        Add contact
+      </Button> */}
     </CustomForm>
   );
 }

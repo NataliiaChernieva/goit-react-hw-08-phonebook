@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
 import { ContactItem} from './ContactListItem.styled';
 import Button from '../Button/Button';
-// import { deleteContact } from '../../redux/actions/items'; //без Toolkit i Slice
-
 
 export default function ContactListItem({ name, number, onClick}) {
   return (

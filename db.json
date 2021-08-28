@@ -1,0 +1,19 @@
+{
+  "contacts": [
+    {
+      "name": "nata",
+      "number": "544111",
+      "id": "edbbf438-b0e9-41b1-9b9f-16218458c94f"
+    },
+    {
+      "name": "ivan",
+      "number": "125489",
+      "id": "4cb91474-4d31-491c-902f-8e4154e59aa1"
+    },
+    {
+      "name": "olga",
+      "number": "7896541",
+      "id": "6c2b852e-10ea-4f90-b6ca-b93a5523d4fc"
+    }
+  ]
+}

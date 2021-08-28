@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { toast } from 'react-hot-toast';
 import { CustomForm } from './Form.styled';
-// import { Spinner } from '../Spinner/Spinner';
+import { Spinner } from '../Spinner/Spinner';
 import Button from '../Button/Button';
 import Input from '../Input/Input';
 import { useDispatch, useSelector } from 'react-redux';
 import {postContact} from 'redux/contacts/contactsOperations';
-import { getContacts } from 'redux/contacts/contactsSelectors';
+import { getContacts, getIsLoading } from 'redux/contacts/contactsSelectors';
 
 export default function Form() {
   const [name, setName] = useState('');
@@ -15,6 +15,7 @@ export default function Form() {
 
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
+  const isLoading = useSelector(getIsLoading);
     
   const handleSetInfo = e => {
     const { name, value } = e.target;
@@ -69,11 +70,11 @@ export default function Form() {
         required
         onChange={handleSetInfo}
       />
-      <Button type="submit" text="Add contact" />
-       {/* <Button type="submit" disabled={isLoading}>
+      {/* <Button type="submit" text="Add contact" /> */}
+       <Button type="submit" text="Add contact" disabled={isLoading}>
         {isLoading && <Spinner size={12} />}
-        Add contact
-      </Button> */}
+        
+      </Button>
     </CustomForm>
   );
 }

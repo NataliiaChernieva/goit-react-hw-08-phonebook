@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { authOperations } from 'redux/auth';
-import { Container, Title } from '../Container/Container.styled';
-import { CustomForm } from '../Form/Form.styled';
+import { Container, Title } from '../components/Container/Container.styled';
+import { CustomForm } from '../components/Form/Form.styled';
 import Input from 'components/Input/Input';
-import Button from '../Button/Button';
+import Button from '../components/Button/Button';
 
 export default function RegisterView () {
     const dispatch = useDispatch();

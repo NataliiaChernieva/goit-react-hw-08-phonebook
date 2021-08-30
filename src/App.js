@@ -1,30 +1,49 @@
-import React, {useEffect} from 'react';
-import { Switch, Route } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import LoginView from "views/LoginView";
-import RegisterView from "views/RegisterView";
-import ContactsFormView from "views/ContactsFormView";
+import React, {useEffect, Suspense, lazy} from 'react';
+import { Switch } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import authOperations from 'redux/auth';
 import AppBar from 'components/AppBar/AppBar';
+import PrivateRoute from 'components/PrivateRoute';
+import PublicRoute from 'components/PublicRoute';
+import { authSelectors } from 'redux/auth';
+// import {Container} from 'components/Container/Container.styled'
 
+const RegisterView = lazy(() => import('./views/RegisterView'));
+const LoginView = lazy(() => import('./views/LoginView'));
+const ContactsFormView = lazy(() => import('./views/ContactsFormView'));
+// const UploadView = lazy(() => import('./views/UploadView'));
 
 export default function App() {
-    const dispatch = useDispatch();
-    
+  const dispatch = useDispatch();
+  const isFetchingCurrentUser = useSelector(authSelectors.getIsFetchingCurrentUser)
 
   useEffect(() => {
     dispatch(authOperations.fetchCurrentUser());
   }, [dispatch]);
 
   return (
-    <>
-      <AppBar/>
+      isFetchingCurrentUser ? (
+        <h2>Loading...</h2>
+      ) : (
+        <>
+          <AppBar />
          
-      <Switch>
-        <Route path="/register" component={RegisterView} />
-        <Route path="/login" component={LoginView} />
-        <Route path="/contacts" component={ContactsFormView} />
-      </Switch>
-    </>
+          <Switch>
+            <Suspense fallback={<h2>Loading...</h2>}></Suspense>
+            <PublicRoute path="/register" restricted >
+              <RegisterView />
+            </PublicRoute>
+        
+            <PublicRoute path="/login" restricted redirectTo="/contacts">
+              <LoginView />
+            </PublicRoute>
+
+            <PrivateRoute path="/contacts" redirectTo="/login">
+              <ContactsFormView />
+            </PrivateRoute>
+          </Switch>
+        </>
+      )
+    
   );
-}
+};

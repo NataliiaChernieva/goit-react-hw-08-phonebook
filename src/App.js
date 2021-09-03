@@ -1,11 +1,10 @@
 import React, {useEffect, Suspense, lazy} from 'react';
 import { Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import authOperations from 'redux/auth';
+import {authOperations, authSelectors} from 'redux/auth';
 import AppBar from 'components/AppBar/AppBar';
 import PrivateRoute from 'components/PrivateRoute';
 import PublicRoute from 'components/PublicRoute';
-import { authSelectors } from 'redux/auth';
 // import {Container} from 'components/Container/Container.styled'
 
 const RegisterView = lazy(() => import('./views/RegisterView'));
@@ -29,8 +28,8 @@ export default function App() {
           <AppBar />
          
           <Switch>
-            <Suspense fallback={<h2>Loading...</h2>}></Suspense>
-            <PublicRoute path="/register" restricted >
+            <Suspense fallback={<h2>Loading...</h2>}>
+            <PublicRoute path="/"  exact restricted redirectTo="/contacts" >
               <RegisterView />
             </PublicRoute>
         
@@ -41,6 +40,7 @@ export default function App() {
             <PrivateRoute path="/contacts" redirectTo="/login">
               <ContactsFormView />
             </PrivateRoute>
+            </Suspense>
           </Switch>
         </>
       )

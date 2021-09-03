@@ -3,9 +3,11 @@ import { useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import ContactListItem from '../ContactListItem/ContactListItem';
 import { contactsOperations, contactsSelectors } from 'redux/contacts';
+// import { v4 as uuidv4 } from 'uuid';
 
 export default function ContactList() {
   const dispatch = useDispatch();
+  // const id = uuidv4();
 
   useEffect(() => {
     dispatch(contactsOperations.fetchContacts());
@@ -15,7 +17,7 @@ export default function ContactList() {
   
   return (
     <ul>
-      {filteredContacts.map(({ id, name, number }) => (
+      {filteredContacts && filteredContacts.map(({name, number, id }) => (
         <ContactListItem
           key={id}
           name={name}
@@ -29,4 +31,19 @@ export default function ContactList() {
     </ul>
   );
 }
+
+// {filteredContacts.map(({name, number}) => {
+//           const id = uuidv4();
+//           return (<ContactListItem
+//           key={id}
+//           name={name}
+//           number={number}
+//           onClick={() => {
+//             dispatch(contactsOperations.deleteContact(id));
+//             toast.success('Сontact is deleted from the phone book!');
+//           }}
+//         />)
+//       }
+        
+//       )}
 

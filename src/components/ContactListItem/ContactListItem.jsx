@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { ContactItem} from './ContactListItem.styled';
 import Button from '../Button/Button';
 
-export default function ContactListItem({ name, number, onClick}) {
+export default function ContactListItem({name, number, onClick}) {
   return (
     <ContactItem>
       {name} : {number}

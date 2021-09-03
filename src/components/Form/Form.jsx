@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 import { toast } from 'react-hot-toast';
 import { CustomForm } from './Form.styled';
 import { Spinner } from '../Spinner/Spinner';
@@ -16,6 +16,8 @@ export default function Form() {
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
   const isLoading = useSelector(getIsLoading);
+  
+  
     
   const handleSetInfo = e => {
     const { name, value } = e.target;
@@ -35,12 +37,12 @@ export default function Form() {
 
   const handleAddContact = e => {
     e.preventDefault();
-    const id = uuidv4();
-
+    // const id = uuidv4();
+    
     contacts.find(savedContact => savedContact.name === name)
       ? alert(`${name} is already in contacts`)
-      : dispatch(postContact({ name, number, id }));
-      
+      : dispatch(postContact({ name, number}));
+                
     reset();
     toast.success('Сontact is added to the phone book!');
   };
@@ -70,8 +72,7 @@ export default function Form() {
         required
         onChange={handleSetInfo}
       />
-      {/* <Button type="submit" text="Add contact" /> */}
-       <Button type="submit" text="Add contact" disabled={isLoading}>
+      <Button type="submit" text="Add contact" disabled={isLoading}>
         {isLoading && <Spinner size={12} />}
         
       </Button>

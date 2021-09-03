@@ -13,9 +13,8 @@ export default function UserMenu() {
     <UserMenuContainer>
       <UserImg src={avatar} alt="" width="32"/>
       <SayHello >Wellcome, {name}</SayHello>
-      <Button type="button" onClick={() => dispatch(authOperations.logOut())}>
-        LOG OUT
-      </Button>
+      <Button type="button" text="LOG OUT" onClick={() => dispatch(authOperations.logOut())}/>
+        
     </UserMenuContainer>
   );
 }

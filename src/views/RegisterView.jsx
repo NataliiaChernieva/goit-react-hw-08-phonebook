@@ -46,7 +46,7 @@ export default function RegisterView () {
     
     return (
         <Container>
-            <Title>Registration Page</Title>
+            <Title>Registration</Title>
             <CustomForm onSubmit={handleSubmit} autoComplete="off">
                 <Input
                     type="text"
@@ -61,8 +61,6 @@ export default function RegisterView () {
                     type="email"
                     name="email"
                     value={email}
-                    // pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-                    // title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
                     required
                     onChange={handleChange}
                 />

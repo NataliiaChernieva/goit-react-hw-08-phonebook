@@ -10,6 +10,7 @@ const itemsSlice=createSlice({
   } ,
   extraReducers: {
     [contactsOperations.fetchContacts.fulfilled]: (state, action) => {
+      console.log(`actionF`, action);
       return {
         ...state,
         entities: action.payload,
@@ -27,6 +28,7 @@ const itemsSlice=createSlice({
     },
 
     [contactsOperations.postContact.fulfilled]: (state, action) => {
+      console.log(`actionP`, action);
       return {...state,
         entities: [...state.entities, action.payload],
         isLoading: false,
@@ -37,7 +39,8 @@ const itemsSlice=createSlice({
       return {...state, isLoading: true, error: null,}
     },
 
-    [contactsOperations.postContact.rejected]: (state) => {
+    [contactsOperations.postContact.rejected]: (state, action) => {
+      console.log(`actionE`, action);
       return {...state, isLoading: false, error: "ERROR",}
     },
 

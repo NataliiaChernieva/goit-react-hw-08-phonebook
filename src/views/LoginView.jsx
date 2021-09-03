@@ -29,7 +29,7 @@ export default function LoginView () {
 
     const handleSubmit = e => {
         e.preventDefault();
-        dispatch(authOperations.register({ email, password }));
+        dispatch(authOperations.logIn({ email, password }));
         reset();
     }
 
@@ -40,7 +40,7 @@ export default function LoginView () {
     
     return (
         <Container>
-            <Title>Autorization Page</Title>
+            <Title>Autorization</Title>
             <CustomForm onSubmit={handleSubmit} autoComplete="off">
                 <Input
                     type="email"

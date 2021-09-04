@@ -1,35 +1,21 @@
-import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
-axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
-
-const token = {
-  set(token) {
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-  },
-  unset() {
-    axios.defaults.headers.common.Authorization = '';
-  },
-};
+import * as authAPI from 'services/auth-api';
 
 const register = createAsyncThunk('auth/register',
-    async (credentials) => {
-        console.log(`credentials`, credentials);
+    async (newUser) => {
+        console.log(`newUser`, newUser);
     try {
-        const data = await axios.post('/users/singup', credentials);
+        const data  = await authAPI.postSignUp(newUser);
         console.log(`data`, data);
-        
-        token.set(data.token);
         return data;
     } catch (error) {
          console.log(error.message);
     }
 });
 
-const logIn = createAsyncThunk('auth/login', async credentials => {
+const logIn = createAsyncThunk('auth/login', async user => {
     try {
-        const { data } = await axios.post('/users/login', credentials);
-        token.set(data.token);
+        const data = await authAPI.postLogIn(user);
         return data;
     } catch (error) {
          console.log(error.message);        
@@ -38,8 +24,7 @@ const logIn = createAsyncThunk('auth/login', async credentials => {
 
 const logOut = createAsyncThunk('auth/logout', async () => {
     try {
-        await axios.post('/users/logout');
-        token.unset();
+        await authAPI.postLogOut;
     } catch (error) {
          console.log(error.message);
     }
@@ -48,15 +33,15 @@ const logOut = createAsyncThunk('auth/logout', async () => {
 const fetchCurrentUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) => {
     const state = thunkAPI.getState();
     const persistedToken = state.auth.token;
-    if (persistedToken === null) {
-        // return state;
+   
+    
+    try {
+         if (persistedToken === null){
         return thunkAPI.rejectWithValue();
     }
-
-    token.set(persistedToken);
-    try {
-        const { data } = await axios.get('/users/current');
-        return data;
+        authAPI.token.set(persistedToken);
+        const currentUser = await authAPI.getCurrentUser;
+        return currentUser;
     } catch (error) {
         console.log(error.message);
     }

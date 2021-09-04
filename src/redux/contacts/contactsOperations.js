@@ -9,32 +9,31 @@ export const fetchContacts = createAsyncThunk('contacts/fetchContacts',
             console.log(`contactsFromDB`, contactsFromDB);
             return contactsFromDB;   
         } catch (error) {
-            return rejectWithValue(error);
+            return rejectWithValue(error.message);
         }
     
 });
 
 export const postContact = createAsyncThunk('contacts/postContacts',
-    async (newContact) => {
+    async (newContact, { rejectWithValue }) => {
         console.log(`newContact`, newContact);
         try {
             const contactsFromDB = await contactsAPI.postContact(newContact);
            console.log(`contactsFromDB`, contactsFromDB);
             return contactsFromDB;   
         } catch (error) {
-            console.log(`errorinPostApi`, error)
-            return (error);
+            return rejectWithValue(error.message);
         }
     
     });
 
 export const deleteContact = createAsyncThunk('contacts/deleteContacts',
-    async (idContact) => {
+    async (idContact, { rejectWithValue }) => {
         try {
             await contactsAPI.deleteContact(idContact);
             return idContact;   
         } catch (error) {
-            return (error);
+            return rejectWithValue(error.message);
         }
     
 });

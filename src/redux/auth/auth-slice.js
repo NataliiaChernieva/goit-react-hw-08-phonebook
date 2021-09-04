@@ -13,63 +13,38 @@ const authSlice = createSlice({
     initialState,
     extraReducers: {
         [authOperations.register.fulfilled]: (state, action) => {
-            console.log(`actionR`, action)
-            return {
-                ...state,
-                user: action.meta.arg,
-                token: action.meta.requestId,
-                isLoggedIn: true,
-            }
+            console.log(`action`, action);
+            state.user = action.payload.user;
+            state.token = action.payload.token;
+            state.isLoggedIn = true;
         },
-        // [authOperations.register.pending]:
-        // [authOperations.register.rejected]:
-
+        
         [authOperations.logIn.fulfilled]: (state, action) => {
-            return {
-                ...state,
-                user: action.payload.user,
-                token: action.payload.token,
-                isLoggedIn: true,
-            }
+            state.user = action.payload.user;
+            state.token = action.payload.token;
+            state.isLoggedIn = true;
         },
-        // [authOperations.logIn.pending]:
-        // [authOperations.logIn.rejected]:
-
+        
         [authOperations.logOut.fulfilled]: (state, action) => {
-            return {
-                ...state,
-                user: { name: null, email: null },
-                token: null,
-                isLoggedIn: false,
-            }
+            state.user={ name: null, email: null };
+            state.token=null;
+            state.isLoggedIn=false;
         },
-        // [authOperations.logOut.pending]:
-        // [authOperations.logOut.rejected]:
- 
+         
         [authOperations.fetchCurrentUser.pending]: (state) => {
-            return {
-                ...state,
-                isFeatchingCurrentUser: true,
-            }
-
+            state.isFeatchingCurrentUser=true;
         },
     
         [authOperations.fetchCurrentUser.fulfilled]: (state, action) => {
-            return {
-                 ...state,
-                user: action.payload,
-                isLoggedIn: true,
-                isFeatchingCurrentUser: false,
-            }
+            state.user=action.payload;
+            state.isLoggedIn=true;
+            state.isFeatchingCurrentUser=false;
         },
         
         [authOperations.fetchCurrentUser.rejected]: (state) => {
-            return {
-                ...state,
-                isFeatchingCurrentUser: false,
-            }
+            state.isFeatchingCurrentUser=false;
         }
-    }
+    },
 });
 
 const authReducer = authSlice.reducer;

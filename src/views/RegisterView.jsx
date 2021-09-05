@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { authOperations } from 'redux/auth';
-import { Container, Title } from '../components/Container/Container.styled';
+import { Container, Title, Choice } from '../components/Container/Container.styled';
 import { CustomForm } from '../components/Form/Form.styled';
 import Input from 'components/Input/Input';
 import Button from '../components/Button/Button';
+
 
 export default function RegisterView () {
     const dispatch = useDispatch();
@@ -74,6 +76,10 @@ export default function RegisterView () {
                     onChange={handleChange}
                 />
                 <Button type="submit" text="SING UP" />
+
+                <Choice>
+                    <Link to="/login">Already registered? Login</Link>
+                </Choice>
             </CustomForm>
         </Container>
     );

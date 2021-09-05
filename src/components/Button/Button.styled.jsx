@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 export const CustomButton = styled.button`
+  display: block;
   background-color: #ff6b0a;
   border: none;
   border-radius: 5px;

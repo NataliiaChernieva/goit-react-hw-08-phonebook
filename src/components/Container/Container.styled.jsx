@@ -16,7 +16,7 @@ export const Title = styled.h1`
   font-weight: 800;
   text-align: center;
   text-transform: uppercase;
-  margin-bottom: 10px;
+  margin-bottom: 16px;
 `;
 
 export const SectionTitle = styled.h2`
@@ -27,4 +27,11 @@ export const SectionTitle = styled.h2`
   text-transform: uppercase;
   margin-top: 30px;
   margin-bottom: 10px;
+`;
+
+export const Choice = styled.p`
+margin-top: 14px;
+display:flex;
+justify-content: flex-end;
+font-size: 14px;
 `;

@@ -2,39 +2,39 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import * as authAPI from 'services/auth-api';
 
 const register = createAsyncThunk('auth/register',
-    async (newUser) => {
+    async (newUser, { rejectWithValue }) => {
         console.log(`newUser`, newUser);
     try {
-        const data  = await authAPI.postSignUp(newUser);
+        const data = await authAPI.postSignUp(newUser);
         console.log(`data`, data);
         return data;
     } catch (error) {
-         console.log(error.message);
+        return rejectWithValue(error.message);
     }
 });
 
-const logIn = createAsyncThunk('auth/login', async user => {
+const logIn = createAsyncThunk('auth/login',
+    async (user, { rejectWithValue }) => {
     try {
         const data = await authAPI.postLogIn(user);
         return data;
     } catch (error) {
-         console.log(error.message);        
+         return rejectWithValue(error.message);        
     }
 });
 
-const logOut = createAsyncThunk('auth/logout', async () => {
+const logOut = createAsyncThunk('auth/logout', async (_, { rejectWithValue }) => {
     try {
         await authAPI.postLogOut;
     } catch (error) {
-         console.log(error.message);
+         return rejectWithValue(error.message);
     }
 });
 
 const fetchCurrentUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) => {
     const state = thunkAPI.getState();
     const persistedToken = state.auth.token;
-   
-    
+       
     try {
          if (persistedToken === null){
         return thunkAPI.rejectWithValue();

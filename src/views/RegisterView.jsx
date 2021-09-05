@@ -68,8 +68,8 @@ export default function RegisterView () {
                     type="password"
                     name="password"
                     value={password}
-                    minlength="8"
-                    title="Минимальная длина пароля - 8 символов"
+                    pattern="[0-9a-fA-F]{4,8}"
+                    title="Длина пароля 4-8 символов"
                     required
                     onChange={handleChange}
                 />

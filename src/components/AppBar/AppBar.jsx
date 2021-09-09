@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import UserMenu from '../UserMenu/UserMenu';
 import AuthNavigation from '../AuthNavigation/AuthNavigation';
 import { authSelectors } from 'redux/auth';
-import { Header } from './AppBar.styled';
+import { Header, Menu } from './AppBar.styled';
 import { NavLink } from 'react-router-dom';
 
 export default function AppBar() {
@@ -10,7 +10,10 @@ export default function AppBar() {
   
     return (
       <Header>
-        <NavLink to="/" exact>Home</NavLink>
+        <Menu>
+          <NavLink to="/" exact>Home</NavLink>
+          {isLoggedIn && <NavLink to="/contacts">My contacts</NavLink>}
+        </Menu>
         {isLoggedIn ? <UserMenu /> : <AuthNavigation />}
     </Header>
   );

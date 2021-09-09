@@ -12,5 +12,9 @@ font-weight: 700;
     color: #2A363B;
     padding: 12px;
 }
+`;
 
+export const Menu = styled.div`
+display: flex;
+ustify-content: flex-start;
 `;

@@ -23,9 +23,10 @@ const logIn = createAsyncThunk('auth/login',
     }
 });
 
-const logOut = createAsyncThunk('auth/logout', async (_, { rejectWithValue }) => {
+const logOut = createAsyncThunk('auth/logout', async (credentials, { rejectWithValue }) => {
     try {
-        await authAPI.postLogOut;
+        const data = await authAPI.postLogOut(credentials);
+        return data;
     } catch (error) {
          return rejectWithValue(error.message);
     }
@@ -37,10 +38,10 @@ const fetchCurrentUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) =>
        
     try {
          if (persistedToken === null){
-        return thunkAPI.rejectWithValue();
-    }
+          return thunkAPI.rejectWithValue();
+        }
         authAPI.token.set(persistedToken);
-        const currentUser = await authAPI.getCurrentUser;
+        const currentUser = await authAPI.getCurrentUser();
         return currentUser;
     } catch (error) {
        return thunkAPI.rejectWithValue(error.message);

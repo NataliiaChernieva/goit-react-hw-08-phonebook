@@ -14,10 +14,19 @@ export default function ContactList() {
   }, [dispatch]);
   
   const filteredContacts = useSelector(contactsSelectors.getFilteredContact);
+  const sortedContacts = filteredContacts.sort(function (a, b) {
+    if (a.name > b.name) {
+      return 1;
+    }
+    if (a.name < b.name) {
+      return -1;
+    }
+    return 0;
+  });
   
   return (
     <ul>
-      {filteredContacts && filteredContacts.map(({name, number, id }) => (
+      {filteredContacts && sortedContacts.map(({name, number, id }) => (
         <ContactListItem
           key={id}
           name={name}

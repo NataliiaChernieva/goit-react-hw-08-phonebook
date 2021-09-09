@@ -13,7 +13,7 @@ import { getContacts } from 'redux/contacts/contactsSelectors';
 
 export default function ContactsFormView() {
   const contacts = useSelector(getContacts);
-  console.log(`contacts`, contacts);
+  //console.log(`contacts`, contacts);
   
   return (
     <Container>

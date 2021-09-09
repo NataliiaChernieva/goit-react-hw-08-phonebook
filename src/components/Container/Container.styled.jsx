@@ -41,28 +41,28 @@ export const Container = styled.div`
 export const Title = styled.h2`
   display: block;
   font-size: 26px;
-  font-weight: 800;
+  font-weight: 700;
   text-align: center;
-  text-transform: uppercase;
+  //text-transform: uppercase;
   margin-bottom: 20px;
 `;
 
 export const MainTitle = styled.h1`
   display: block;
   font-size: 26px;
-  font-weight: 800;
+  font-weight: 700;
   text-align: center;
   margin-top:80px;
-  text-transform: uppercase;
+  //text-transform: uppercase;
   
 `;
 
 export const SectionTitle = styled.h3`
   display: block;
   font-size: 20px;
-  font-weight: 800;
+  font-weight: 700;
   text-align: center;
-  text-transform: uppercase;
+  // text-transform: uppercase;
   margin-top: 30px;
   margin-bottom: 10px;
 `;

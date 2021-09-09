@@ -10,8 +10,7 @@ const itemsSlice=createSlice({
   } ,
   extraReducers: {
     [contactsOperations.fetchContacts.fulfilled]: (state, action) => {
-      console.log(`actionF`, action);
-      return {
+       return {
         ...state,
         entities: action.payload,
         isLoading: false,

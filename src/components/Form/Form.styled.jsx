@@ -1,5 +1,8 @@
 import styled from '@emotion/styled';
 
 export const CustomForm = styled.form`
-  padding: 0px;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+ padding: 0px;
 `;
